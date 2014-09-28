@@ -1,20 +1,20 @@
 #!/usr/bin/python -tt
 # Copyright 2014 Brendan Ferracciolo
 # 
-# This file is part of ProjectRed-NeckedFalcon.
+# This file is part of Project Red-Necked Falcon.
 #
-# ProjectRed-NeckedFalcon is free software: you can redistribute it and/or modify
+# Project Red-Necked Falcon is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
 # (at your option) any later version.
 #
-# ProjectRed-NeckedFalcon is distributed in the hope that it will be useful,
+# Project Red-Necked Falcon is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
-# along with ProjectRed-NeckedFalcon. If not, see <http://www.gnu.org/licenses/>.
+# along with Project Red-Necked Falcon. If not, see <http://www.gnu.org/licenses/>.
 
 """<insert man page here>"""
 
