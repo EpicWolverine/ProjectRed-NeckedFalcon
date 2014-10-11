@@ -11,6 +11,8 @@ Project Red-Necked Falcon requires:
 * Python 2.7.3. While Python 2.7.3 is the only version of Python Project Red-Necked Falcon officially supports, it may or may not work in older or newer versions of Python.
 * A Steam Web API key. You can obtain one at http://steamcommunity.com/dev. This key must be placed in a text file called apikey.txt in the same folder as main.py.
 * [Smily Barry's SteamAPI](https://github.com/smiley/steamapi) and its dependancies.
+ 
+Simply run main.py to generate an output file with 100 Steam users. 
 
 License
 ===========
