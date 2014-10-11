@@ -28,6 +28,8 @@ myapikey=open("apikey.txt").read() # retrieve API key from apikey.txt
 steamapi.core.APIConnection(api_key=myapikey) # initialize API
 
 def main():
+    time.clock() #Start timer
+    
     outputfile = open("output.csv", "w")
     outputfile.write("Note: All playtimes are in minutes.\n")
     outputfile.write("Steam User ID,Total Play Time Across All Games,Total Games Owned (including free games),Total Games Played (for > 30 minutes),Most Played Game in the Last 2 Weeks,Time Spent in Most Played Game in the Last 2 Weeks,Active (played a game in the last 2 weeks),Accessed Timestamp\n")
@@ -52,6 +54,8 @@ def main():
     print "Attempts: " + str(attemptnumber)
     print "Data Points: " + str(numdata)
     outputfile.close()
+    
+    print "Elapsed time: " + str(time.clock()) + " seconds." #Stop timer and print result
 
 def GetUserInfo(SteamUserID):
     outputstring = ""
@@ -94,8 +98,11 @@ def GetUserInfo(SteamUserID):
         #print "- " + str(game)
         #print "  2 weeks: " + str(game.playtime_2weeks)
         #print "  Forever: " + str(game.playtime_forever)
-    outputstring += currentuser.recently_played[0].name + " (" + str(currentuser.recently_played[0].appid) + "),"
-    outputstring += str(currentuser.recently_played[0].playtime_2weeks) + ","
+    try:
+        outputstring += currentuser.recently_played[0].name + " (" + str(currentuser.recently_played[0].appid) + "),"
+        outputstring += str(currentuser.recently_played[0].playtime_2weeks) + ","
+    except IndexError:
+        outputstring += ",,"
     
     # Account Active?
     useractive = False
