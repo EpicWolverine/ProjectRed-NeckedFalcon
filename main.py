@@ -16,7 +16,23 @@
 # You should have received a copy of the GNU General Public License
 # along with Project Red-Necked Falcon. If not, see <http://www.gnu.org/licenses/>.
 
-"""Project Red-Necked Falcon v0.2"""
+"""Project Red-Necked Falcon v0.2
+https://github.com/EpicWolverine/ProjectRed-NeckedFalcon
+
+A Python script that collects data on Steam users' games and playing history. Created as part of a school project.
+The Red-Necked Falcon is a falcon with rusty red feathers on the back of its head and neck found in India and sub-Saharen Africa.
+
+--- Usage ---
+Project Red-Necked Falcon requires:
+    * Python 2.7.3. While Python 2.7.3 is the only version of Python Project Red-Necked Falcon officially supports, it may or may not work in older or newer versions of Python.
+    * A Steam Web API key. You can obtain one at http://steamcommunity.com/dev. This key must be placed in a text file called apikey.txt in the same folder as main.py.
+    * Smily Barry's SteamAPI and its dependancies.
+Simply run main.py to generate an output file with 100 Steam users. 
+
+--- License ---
+Project Red-Necked Falcon is licensed under the GNU General Public License V3. A full copy of the license can be found in the LICENSE file in this repository or at http://www.gnu.org/licenses/.
+Licence tl;dr: http://www.tldrlegal.com/license/gnu-general-public-license-v3-(gpl-3)
+"""
 
 import random       # used to generate random Steam User ID
 import steamapi     # Smiley Barry's library for accessing the Steam Web API
@@ -57,11 +73,15 @@ def main():
             print e
             pass
     
+    outputfile.write("Attempts: " + str(attemptnumber) + "\n")
     print "Attempts: " + str(attemptnumber)
+    outputfile.write("Data Points: " + str(numdata) + "\n")
     print "Data Points: " + str(numdata)
-    outputfile.close()
     
+    outputfile.write("Elapsed time: " + str(time.clock()) + " seconds." + "\n")
     print "Elapsed time: " + str(time.clock()) + " seconds." #Stop timer and print result
+    
+    outputfile.close()
 
 def GetUserInfo(SteamUserID):
     outputstring = ""
@@ -108,7 +128,7 @@ def GetUserInfo(SteamUserID):
         #print "  2 weeks: " + str(game.playtime_2weeks)
         #print "  Forever: " + str(game.playtime_forever)
     try:
-        outputstring += currentuser.recently_played[0].name + " (" + str(currentuser.recently_played[0].appid) + "),"
+        outputstring += currentuser.recently_played[0].name.encode('ascii', 'ignore') + " (" + str(currentuser.recently_played[0].appid) + "),"
         outputstring += str(currentuser.recently_played[0].playtime_2weeks) + ","
     except IndexError:
         outputstring += ",0,"
