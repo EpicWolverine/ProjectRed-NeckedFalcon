@@ -16,26 +16,27 @@
 # You should have received a copy of the GNU General Public License
 # along with Project Red-Necked Falcon. If not, see <http://www.gnu.org/licenses/>.
 
-"""Project Red-Necked Falcon v0.1"""
+"""Project Red-Necked Falcon v0.2"""
 
 import random       # used to generate random Steam User ID
 import steamapi     # Smiley Barry's library for accessing the Steam Web API
 import sys          # for various I/O functions
 import time         # datetime support
 
+versionnumber="0.2"
 myapikey=open("apikey.txt").read() # retrieve API key from apikey.txt
 
 steamapi.core.APIConnection(api_key=myapikey) # initialize API
 
 def main():
-    print "Project Red-Necked Falcon v0.1"
+    print "Project Red-Necked Falcon v" + versionnumber
     print "Collecting data in 5 seconds."
     time.sleep(5)
     
     time.clock() #Start timer
         
     outputfile = open("output.csv", "w")
-    outputfile.write("Generated using Project Red-Necked Falcon v0.1.\n")
+    outputfile.write("Generated using Project Red-Necked Falcon v" + versionnumber + ".\n")
     outputfile.write("Note: All playtimes are in minutes.\n")
     outputfile.write("Steam User ID,Total Play Time Across All Games,Total Games Owned (including free games),Total Games Played (for > 30 minutes),Most Played Game in the Last 2 Weeks,Time Spent in Most Played Game in the Last 2 Weeks,Active (played a game in the last 2 weeks),Accessed Timestamp\n")
     
@@ -45,7 +46,7 @@ def main():
         attemptnumber += 1
         try:
             randomuserid = "76561198" + str(random.randint(0,9)) + str(random.randint(0,9)) + str(random.randint(0,9)) + str(random.randint(0,9)) + str(random.randint(0,9)) + str(random.randint(0,9)) + str(random.randint(0,9)) + str(random.randint(0,9)) + str(random.randint(0,9))
-            print "Trying " + randomuserid
+            print "Attempt #" + str(attemptnumber) + ": Trying " + randomuserid
             datarecord = GetUserInfo(randomuserid)
             outputfile.write(datarecord + "\n")
             print "Succeeded!"
@@ -84,7 +85,10 @@ def GetUserInfo(SteamUserID):
     
     # Total Games Owned
     #print "Total Games Owned: " + str(len(currentuser.games))
-    outputstring += str(len(currentuser.games)) + ","
+    numbergamesowned = len(currentuser.games)
+    if numbergamesowned == 0:
+        raise Exception("Junk account (owns 0 games)")
+    outputstring += str(numbergamesowned) + ","
     
     # Total Games Owned That Have Been Played for > 30 Minutes
     playedgames = 0
@@ -107,7 +111,7 @@ def GetUserInfo(SteamUserID):
         outputstring += currentuser.recently_played[0].name + " (" + str(currentuser.recently_played[0].appid) + "),"
         outputstring += str(currentuser.recently_played[0].playtime_2weeks) + ","
     except IndexError:
-        outputstring += ",,"
+        outputstring += ",0,"
     
     # Account Active?
     useractive = False
