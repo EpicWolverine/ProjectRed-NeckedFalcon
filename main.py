@@ -16,7 +16,7 @@
 # You should have received a copy of the GNU General Public License
 # along with Project Red-Necked Falcon. If not, see <http://www.gnu.org/licenses/>.
 
-"""<insert man page here>"""
+"""Project Red-Necked Falcon v0.1"""
 
 import random       # used to generate random Steam User ID
 import steamapi     # Smiley Barry's library for accessing the Steam Web API
@@ -28,9 +28,14 @@ myapikey=open("apikey.txt").read() # retrieve API key from apikey.txt
 steamapi.core.APIConnection(api_key=myapikey) # initialize API
 
 def main():
-    time.clock() #Start timer
+    print "Project Red-Necked Falcon v0.1"
+    print "Collecting data in 5 seconds."
+    time.sleep(5)
     
+    time.clock() #Start timer
+        
     outputfile = open("output.csv", "w")
+    outputfile.write("Generated using Project Red-Necked Falcon v0.1.\n")
     outputfile.write("Note: All playtimes are in minutes.\n")
     outputfile.write("Steam User ID,Total Play Time Across All Games,Total Games Owned (including free games),Total Games Played (for > 30 minutes),Most Played Game in the Last 2 Weeks,Time Spent in Most Played Game in the Last 2 Weeks,Active (played a game in the last 2 weeks),Accessed Timestamp\n")
     
