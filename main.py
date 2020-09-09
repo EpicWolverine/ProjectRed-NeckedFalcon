@@ -16,7 +16,7 @@
 # You should have received a copy of the GNU General Public License
 # along with Project Red-Necked Falcon. If not, see <http://www.gnu.org/licenses/>.
 
-"""Project Red-Necked Falcon v0.2
+"""Project Red-Necked Falcon v0.2.1
 https://github.com/EpicWolverine/ProjectRed-NeckedFalcon
 
 A Python script that collects data on Steam users' games and playing history. Created as part of a school project.
@@ -39,7 +39,7 @@ import steamapi     # Smiley Barry's library for accessing the Steam Web API
 import sys          # for various I/O functions
 import time         # datetime support
 
-versionnumber="0.2"
+versionnumber="0.2.1"
 myapikey=open("apikey.txt").read() # retrieve API key from apikey.txt
 
 steamapi.core.APIConnection(api_key=myapikey) # initialize API
@@ -137,6 +137,8 @@ def GetUserInfo(SteamUserID):
     useractive = False
     if len(currentuser.recently_played) > 0:
         useractive = True
+    else:
+        raise Exception("Inactive user")
     #print "Active?: " + str(useractive)
     outputstring += str(useractive) + ","
     
